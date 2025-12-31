@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mbao Notre Priorité – Recensement</title>
+
+<style>
+:root {
+  --bleu: #1e90ff;
+  --gris: #f4f4f4;
+  --orange: #ff9900;
+}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--gris);
+  color: #333;
+}
+header {
+  background: var(--bleu);
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+header img {
+  height: 60px;
+  margin-right: 15px;
+}
+header h1 {
+  font-size: 1.8em;
+  margin: 0;
+}
+nav {
+  background: #0f5fbf;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+nav a {
+  color: white;
+  padding: 15px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+nav a:hover {
+  background: #0a4a95;
+}
+section {
+  padding: 30px;
+  max-width: 900px;
+  margin: 20px auto;
+  background: white;
+  border-radius: 8px;
+}
+h2 {
+  color: var(--bleu);
+  margin-bottom: 15px;
+}
+iframe {
+  width: 100%;
+  height: 700px;
+  border: none;
+  border-radius: 8px;
+}
+.message-remerciement {
+  background: #e6ffea;
+  color: #0a7a2f;
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 15px;
+  text-align: center;
+  font-weight: bold;
+  display: none;
+  font-size: 1.1em;
+}
+footer {
+  margin-top: 30px;
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  header { flex-direction: column; text-align: center; }
+  header img { margin-bottom: 10px; }
+  nav a { padding: 12px; font-size: 14px; }
+  iframe { height: 600px; }
+}
+@media (max-width: 480px) {
+  iframe { height: 500px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <!-- Logo à remplacer par le lien GitHub -->
+  <img src="logo.png" alt="Logo Mbao Notre Priorité">
+  <h1>Mbao Notre Priorité</h1>
+</header>
+
+<nav>
+  <a href="#presentation">Présentation</a>
+  <a href="#recensement">Recensement</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<section id="presentation">
+  <h2>Présentation du mouvement</h2>
+  <p><strong>Mbao Notre Priorité</strong> est un mouvement citoyen engagé pour l’amélioration des conditions de vie et le développement local à Mbao.</p>
+  <p>Le recensement nous permet de mieux connaître les citoyens et leur volonté de participer au changement.</p>
+</section>
+
+<section id="recensement">
+  <h2>Formulaire de recensement</h2>
+  <p>Remplissez le formulaire ci-dessous pour vous inscrire :</p>
+
+  <!-- Formulaire intégré -->
+  <iframe id="formulaire" src="https://docs.google.com/forms/d/e/1FAIpQLSeZAVUOrIS1oeAmzI1RiMIXk_Iwke3nKGxrUoQSriQ5kZMUpQ/viewform?usp=dialog">Votre navigateur ne supporte pas les iframes.</iframe>
+
+  <div class="message-remerciement" id="merciMessage">
+    ✅ Merci pour votre inscription ! Votre engagement pour Mbao est précieux.
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <p>Téléphone : <strong><a href="tel:+221774938305">+221 77 493 83 05</a></strong></p>
+  <p>Email : <strong><a href="mailto:contact@mbaonotrepriorite.sn">mbaonotrepriorite@gmail.com</a></strong></p>
+</section>
+
+<footer>
+  <p>© 2026 – Mouvement Mbao Notre Priorité</p>
+</footer>
+
+<script>
+// Message de remerciement après soumission du formulaire
+// En raison de la sécurité cross-origin, le vrai "submit" n'est pas détectable
+// Solution : afficher le message après un délai pour l'utilisateur
+const iframe = document.getElementById('formulaire');
+iframe.addEventListener('load', () => {
+  try {
+    const doc = iframe.contentDocument || iframe.contentWindow.document;
+    const bouton = doc.querySelector('div[role="button"][aria-disabled="false"]'); 
+    if (bouton) {
+      bouton.addEventListener('click', () => {
+        setTimeout(() => {
+          document.getElementById('merciMessage').style.display = 'block';
+        }, 1000);
+      });
+    }
+  } catch(e) {
+    console.log("Impossible d'accéder à l'iframe, le message s'affichera manuellement.");
+  }
+});
+</script>
+
+</body>
+</html>
